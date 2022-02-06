@@ -1,0 +1,83 @@
+<div>
+  <mat-card-title>Cadastro</mat-card-title>
+  <mat-card-subtitle>Sistema de Agendamento de Aulas</mat-card-subtitle>
+
+  <form (ngSubmit)="register()" #registerForm="ngForm">
+    <mat-form-field class="full-width form-group" appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input
+        type="text"
+        [(ngModel)]="nome"
+        name="nome"
+        matInput
+        #inputName="ngModel"
+        required
+      />
+      <mat-hint *ngIf="inputName.invalid && inputName.touched" class="input-errors">Nome é obrigatório</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="full-width form-group" appearance="fill">
+      <mat-label>E-email</mat-label>
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        matInput
+        #inputEmail="ngModel"
+        required
+      />
+      <mat-hint *ngIf="inputEmail.invalid && inputEmail.touched" class="input-errors">E-mail é obrigatório</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="full-width form-group" appearance="fill">
+      <mat-label>Data de nascimento</mat-label>
+      <input
+        [matDatepicker]="picker"
+        name="dataNascimento"
+        #bithDate="ngModel"
+        [(ngModel)]="dataNascimento"
+        required
+        matInput
+      >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-hint *ngIf="bithDate.invalid && bithDate.touched" class="input-errors">Data de nascimento é obrigatória</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="full-width form-group" appearance="fill">
+      <mat-label>Tipo de usuário</mat-label>
+      <mat-select
+        #userTypes="ngModel"
+        [(ngModel)]="tipoUsuario"
+        name="tipoUsuario"
+        required
+      >
+        <mat-option *ngFor="let tipoUsuario of tiposUsuarios" [value]="tipoUsuario.value">
+          {{tipoUsuario.label}}
+        </mat-option>
+      </mat-select>
+      <mat-hint *ngIf="userTypes.invalid && userTypes.touched" class="input-errors">Tipo de usuario é obrigatório</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="full-width form-group" appearance="fill">
+      <mat-label>Senha</mat-label>
+      <input
+        [type]="inputPasswordType"
+        [(ngModel)]="senha"
+        name="senha"
+        matInput
+        #inputPassword="ngModel"
+        required
+      />
+      <mat-icon matSuffix (click)="changeInputPasswordType()" class="cursor-pointer">{{isPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-hint *ngIf="inputPassword.invalid && inputPassword.touched" class="input-errors">Senha é obrigatória</mat-hint>
+    </mat-form-field>
+
+    <div class="d-flex justify-between">
+      <button mat-raised-button color="accent" (click)="backToLogin()">Voltar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>
