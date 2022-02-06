@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import IAuth from '../../interfaces/IAuth';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,7 @@ import { Observable } from 'rxjs';
 export class AuthenticationService {
   constructor(private httpClient: HttpClient) { }
 
-  auth(email: string, password: string): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/login', {
-      email: email,
-      senha: password
-    });
+  auth(body: IAuth): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/login', body);
   }
 }

@@ -1,0 +1,11 @@
+<mat-form-field class="full-width form-group" [formGroup]="formGroup" appearance="fill">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    type="text"
+    [name]="name"
+    [formControlName]="name"
+    [required]="required"
+  />
+  <mat-hint *ngIf="" class="input-errors">{{ errorMessage }}</mat-hint>
+</mat-form-field>
