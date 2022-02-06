@@ -7,7 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-
+import { NotifierModule } from 'angular-notifier';
+import { NOTIFIER_CONFIG } from './config/constants';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
     HttpClientModule,
     AppRoutingModule,
     MatSnackBarModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatInputModule,
+    NotifierModule.withConfig(NOTIFIER_CONFIG)
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
