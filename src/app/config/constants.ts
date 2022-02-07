@@ -24,3 +24,11 @@ export const ROLE_PROFESSOR = "ROLE_PROFESSOR";
 
 export const JWT_LOCAL_STORAGE = 'AgendamentoAula@Jwt';
 export const USER_LOCAL_STORAGE = 'AgendamentoAula@Me';
+
+export const STATUS_SCHEDULE = [
+  { label: 'A Confirmar', value: 'A_CONFIRMAR' },
+  { label: 'Confirmado', value: 'CONFIRMADO' },
+  { label: 'Negado', value: 'NEGADO' },
+  { label: 'Cancelado', value: 'CANCELADO' },
+  { label: 'Executado', value: 'EXECUTADO' },
+];

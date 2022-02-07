@@ -3,7 +3,7 @@
   <mat-card-subtitle>Sistema de Agendamento de Aulas</mat-card-subtitle>
 
   <form [formGroup]="form" (ngSubmit)="login()">
-    <mat-form-field class="full-width form-group" appearance="fill">
+    <mat-form-field class="full-width form-group" appearance="outline">
       <mat-label>E-email</mat-label>
       <input
         name="email"
@@ -13,7 +13,7 @@
       />
       <mat-hint *ngIf="getErrors('email') !== ''" class="input-errors">{{ getErrors('email') }}</mat-hint>
     </mat-form-field>
-    <mat-form-field class="full-width form-group" appearance="fill">
+    <mat-form-field class="full-width form-group" appearance="outline">
       <mat-label>Senha</mat-label>
       <input
         [type]="inputPasswordType"

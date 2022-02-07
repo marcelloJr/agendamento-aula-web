@@ -13,7 +13,7 @@ export class ScheduleService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllSchedules(size: number, page: number): Observable<IPageableResponse> {
-    return this.httpClient.get(`${API}/agendamento?size=${size}&page=${page}`) as Observable<IPageableResponse>;
+  getAllSchedules(size: number, page: number, filter = ''): Observable<IPageableResponse> {
+    return this.httpClient.get(`${API}/agendamento?size=${size}&page=${page}&filter=${filter}`) as Observable<IPageableResponse>;
   }
 }
