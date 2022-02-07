@@ -18,3 +18,9 @@ export const NOTIFIER_CONFIG: NotifierOptions = {
     showDismissButton: true
   }
 };
+
+export const ROLE_ALUNO = "ROLE_ALUNO";
+export const ROLE_PROFESSOR = "ROLE_PROFESSOR";
+
+export const JWT_LOCAL_STORAGE = 'AgendamentoAula@Jwt';
+export const USER_LOCAL_STORAGE = 'AgendamentoAula@Me';

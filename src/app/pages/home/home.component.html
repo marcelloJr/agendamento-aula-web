@@ -1,1 +1,11 @@
-<h1>Tela de Home</h1>
+<mat-toolbar color="primary">
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="ml-4">Bem vindo, {{ name }}</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="confirmLogout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+<app-schedule></app-schedule>

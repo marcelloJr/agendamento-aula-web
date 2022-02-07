@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      email: ['', [required, email]],
-      senha: ['', [required, minLength(8), maxLength(50)]]
+      email: ['mhmj2425@gmail.com', [required, email]],
+      senha: ['@#Mhmj2425#@', [required, minLength(8), maxLength(50)]]
     });
   }
 
@@ -36,10 +36,6 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       const body = this.form.getRawValue() as IAuth;
       this.authService.auth(body).subscribe({
-        next: (v) => {
-          console.log(v);
-          this.router.navigate(['home']);
-        },
         error: (e) => {
           const mensagem = Array.isArray(e.error) ? e.error[0].mensagem : e.error.mensagem;
           this.notifications.notify({ message: mensagem, type: 'error' });

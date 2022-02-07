@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterService } from 'src/app/services/user/register.service';
+import { UserService } from 'src/app/services/user/user.service';
 import IUser from 'src/app/interfaces/IUser';
 import { NotificationsService } from 'src/app/components/notifications/notifications.service';
 import { format } from 'date-fns';
@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router: Router,
     private notifications: NotificationsService,
-    private service: RegisterService,
+    private userService: UserService,
     private formBuilder: FormBuilder
   ) { }
 
@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
       const user = this.form.getRawValue() as IUser;
       user.dataNascimento = format(new Date(user.dataNascimento), 'yyyy-MM-dd');
 
-      this.service.regiterUser(user).subscribe({
+      this.userService.regiterUser(user).subscribe({
         next: (v) => {
           console.log(v);
           this.router.navigate(['']);
