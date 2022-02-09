@@ -5,23 +5,23 @@ export interface IPageableSort {
 }
 
 export interface IPageable {
-  sort: IPageableSort,
-  offset: number,
-  pageNumber: number,
+  sort: IPageableSort;
+  offset: number;
+  pageNumber: number;
   pageSize: number;
-  paged: boolean,
+  paged: boolean;
   unpaged: boolean
 }
 
 export default interface IPageableResponse {
-  content: Array<any>,
-  pageable: IPageable,
+  content: Array<any>;
+  pageable: IPageable;
   totalElements: number;
   totalPages: number;
-  last: boolean,
+  last: boolean;
   size: number;
   number: number;
-  sort: IPageableSort,
+  sort: IPageableSort;
   numberOfElements: number;
   first: boolean;
   empty: boolean;

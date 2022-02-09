@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TokenService } from '../token/token.service';
-import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'

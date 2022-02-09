@@ -26,9 +26,25 @@ export const JWT_LOCAL_STORAGE = 'AgendamentoAula@Jwt';
 export const USER_LOCAL_STORAGE = 'AgendamentoAula@Me';
 
 export const STATUS_SCHEDULE = [
-  { label: 'A Confirmar', value: 'A_CONFIRMAR' },
+  { label: 'A confirmar', value: 'A_CONFIRMAR' },
   { label: 'Confirmado', value: 'CONFIRMADO' },
   { label: 'Negado', value: 'NEGADO' },
   { label: 'Cancelado', value: 'CANCELADO' },
   { label: 'Executado', value: 'EXECUTADO' },
+];
+
+export const TEACHER_STATUS_SCHEDULE = [
+  { label: 'A confirmar', value: 'A_CONFIRMAR', disabled: true },
+  { label: 'Confirmado', value: 'CONFIRMADO', disabled: false },
+  { label: 'Negado', value: 'NEGADO', disabled: false },
+  { label: 'Cancelado', value: 'CANCELADO', disabled: false },
+  { label: 'Executado', value: 'EXECUTADO', disabled: false },
+];
+
+export const STUDENT_STATUS_SCHEDULE = [
+  { label: 'A confirmar', value: 'A_CONFIRMAR', disabled: true },
+  { label: 'Confirmado', value: 'CONFIRMADO', disabled: true },
+  { label: 'Negado', value: 'NEGADO', disabled: true },
+  { label: 'Cancelado', value: 'CANCELADO', disabled: false },
+  { label: 'Executado', value: 'EXECUTADO', disabled: true }
 ];

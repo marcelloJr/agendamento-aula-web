@@ -14,6 +14,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { FormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatGridListModule } from '@angular/material/grid-list'
 
 @NgModule({
   imports: [
@@ -31,7 +33,9 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatChipsModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    MatAutocompleteModule,
+    MatGridListModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -47,7 +51,9 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatChipsModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    MatAutocompleteModule,
+    MatGridListModule
   ]
 })
 export class SharedModule {}

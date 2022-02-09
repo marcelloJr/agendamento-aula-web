@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-schedule',
+  templateUrl: './schedule.component.html',
+  styleUrls: ['./schedule.component.css']
 })
-export class HomeComponent implements OnInit {
+export class ScheduleComponent implements OnInit {
 
-  name = this.userService.getUserData().nome;
+  userName = this.userService.getUserData().nome;
 
-  constructor(public dialog: MatDialog, private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    public dialog: MatDialog
+  ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {  }
 
   confirmLogout(): void {
     this.dialog.open(ModalComponent, {

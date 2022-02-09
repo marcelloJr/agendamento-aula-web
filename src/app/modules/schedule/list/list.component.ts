@@ -1,20 +1,24 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { format } from 'date-fns';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ROLE_ALUNO, STATUS_SCHEDULE } from 'src/app/config/constants';
 import { EnumScheduleStatus } from 'src/app/interfaces/EnumScheduleStatus';
 import IScheduleTable from 'src/app/interfaces/IScheduleTable';
 import { ScheduleService } from 'src/app/services/schedule/schedule.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { SpringFilterQueryBuilder as SFQB } from 'src/assets/SpringFilterQueryBuilder/src/index';
 
 @Component({
-  selector: 'app-schedule',
-  templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.css']
+  selector: 'app-list-schedule',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
 })
-export class ScheduleComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['data', 'horaInicio', 'horaFim', 'status'];
+export class ListComponent implements OnInit {
+  displayedColumns: string[] = ['data', 'horaInicio', 'horaFim', 'status', 'actions'];
   dataSource = new MatTableDataSource<IScheduleTable>();
   pageSize = 5;
   pageIndex = 0;
@@ -23,6 +27,8 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
 
   statusSchedule = STATUS_SCHEDULE;
   requestFilter = '';
+
+  userProfile = this.userService.getUserData().perfil;
 
   filter = {
     professor: '',
@@ -34,7 +40,11 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private scheduleService: ScheduleService, private userService: UserService) { }
+  constructor(
+    private scheduleService: ScheduleService,
+    private userService: UserService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.getDataSource();
@@ -44,6 +54,20 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  confirmLogout(): void {
+    this.dialog.open(ModalComponent, {
+      width: '300px',
+      data: {
+        title: "Fazer logout?",
+        message: "Deseja realmente sair?",
+        onConfirm: () => {
+          this.userService.logout();
+          this.dialog.closeAll();
+        }
+      }
+    });
   }
 
   private getDataSource() {
@@ -58,6 +82,7 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
         if(e.status === 401) {
           this.userService.logout();
         }
+        this.isLoading = false;
       },
       complete: () => {
         this.isLoading = false;
@@ -106,13 +131,26 @@ export class ScheduleComponent implements OnInit, AfterViewInit {
     this.getDataSource();
   }
 
-  onSort(sortState: Sort) {
-    // sortState.direction;
-  }
-
   onFilter() {
-    if(this.filter.professor !== '') {
-      this.requestFilter = `professor.usuario.nome~'%${this.filter.professor}%'`;
+    const date = this.filter.data ? format(new Date(this.filter.data), "yyyy-MM-dd") : '';
+    let filter = [];
+
+    if(this.userProfile === 'ROLE_ALUNO' && this.filter.professor !== '') {
+      filter.push(SFQB.like('professor.usuario.nome', `%25${this.filter.professor}%25`));
+    } else if(this.userProfile === 'ROLE_PROFESSOR' && this.filter.aluno !== '') {
+      filter.push(SFQB.like('aluno.usuario.nome', `%25${this.filter.aluno}%25`));
+    }
+
+    if(date !== '') {
+      filter.push(SFQB.equal('data', date));
+    }
+
+    if(this.filter.status !== '') {
+      filter.push(SFQB.equal('status', this.filter.status));
+    }
+
+    if(filter.length){
+      this.requestFilter = SFQB.and(...filter).toString();
     }
 
     if(this.requestFilter !== '') {
