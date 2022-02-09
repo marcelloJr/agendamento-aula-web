@@ -11,12 +11,12 @@ const routes: Routes = [
   },
   {
     path: 'usuario',
-    loadChildren: () =>  import('./pages/user/user.module').then((m) => m.UserModule),
+    loadChildren: () =>  import('./modules/user/user.module').then((m) => m.UserModule),
     canLoad: [LoginGuard]
   },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
+    path: 'agendamento',
+    loadChildren: () => import('./modules/schedule/schedule.module').then((m) => m.ScheduleModule),
     canLoad: [AuthenticationGuard]
   }
 ];

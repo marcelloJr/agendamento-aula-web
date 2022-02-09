@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './components/modal/modal.component';
 import { MatButtonModule } from '@angular/material/button';
 import { Interceptors } from './utils/interceptors';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,12 @@ import { Interceptors } from './utils/interceptors';
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptors,
       multi: true,
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        appearance: 'outline'
+      }
     }
   ],
   bootstrap: [AppComponent]

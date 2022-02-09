@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
   inputPasswordType = 'password';
   isPassword = true;
   formSubmitted = false;
+  isLoading = false;
 
   constructor(
     private router: Router,
@@ -48,24 +49,30 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.form.valid) {
+      this.isLoading = true;
+
       const user = this.form.getRawValue() as IUser;
       user.dataNascimento = format(new Date(user.dataNascimento), 'yyyy-MM-dd');
 
       this.userService.regiterUser(user).subscribe({
         next: (v) => {
-          console.log(v);
+          this.notifications.notify({ message: 'Usuário criado com sucesso', type: 'success' });
           this.router.navigate(['']);
         },
         error: (e) => {
           const mensagem = Array.isArray(e.error) ? e.error[0].mensagem : e.error.mensagem;
           this.notifications.notify({ message: mensagem, type: 'error' });
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
         }
       });
     }
     this.formSubmitted = true;
   }
 
-  backToLogin() {
+  goBack() {
     this.router.navigate(['']);
     return false;
   }

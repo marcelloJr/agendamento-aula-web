@@ -4,22 +4,26 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #e7e7e7;}
 table { width: 100%; }
+.loading-container {
+  position: relative;
+}
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-
-.input-errors {
-  color: #f44336;
-}
-.full-width {
-  width: 100%;
-}
-.full-height {
-  height: 100%;
-}
-
-.form-group {
-  margin-bottom: 12px;
-  margin-top: 12px;
-}
+.input-errors { color: #f44336; }
+.full-width { width: 100%; }
+.full-height { height: 100%; }
+.form-group { margin-bottom: 12px;}
 
 /* Margens */
 .mt-1 { margin-top: 4p !important; }
@@ -78,3 +82,5 @@ table { width: 100%; }
 .chip-denied { background-color: #ff4081 !important; }
 .chip-cancelled { background-color: #f44336 !important;  }
 .chip-executed { background-color: #009d51 !important; }
+
+.table-no-data-message { text-align: center; padding-top: 16px !important;}

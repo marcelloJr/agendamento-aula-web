@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   inputPasswordType = 'password';
   isPassword = true;
   formSubmitted = false;
+  isLoading = false;
 
   constructor(
     private authService: AuthenticationService,
@@ -27,18 +28,24 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      email: ['mhmj2425@gmail.com', [required, email]],
-      senha: ['@#Mhmj2425#@', [required, minLength(8), maxLength(50)]]
+      email: ['', [required, email]],
+      senha: ['', [required, minLength(8), maxLength(50)]]
     });
   }
 
   login() {
     if (this.form.valid) {
       const body = this.form.getRawValue() as IAuth;
+      this.isLoading = true;
+
       this.authService.auth(body).subscribe({
         error: (e) => {
           const mensagem = Array.isArray(e.error) ? e.error[0].mensagem : e.error.mensagem;
           this.notifications.notify({ message: mensagem, type: 'error' });
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
         }
       });
     }

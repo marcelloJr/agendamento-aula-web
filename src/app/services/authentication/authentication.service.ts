@@ -29,7 +29,7 @@ export class AuthenticationService {
         this.getMyData().subscribe({
           next: (resMyData) => {
             this.userService.setUserData(JSON.stringify(resMyData));
-            this.router.navigate(['home']);
+            this.router.navigate(['agendamento']);
           }
         });
       }
